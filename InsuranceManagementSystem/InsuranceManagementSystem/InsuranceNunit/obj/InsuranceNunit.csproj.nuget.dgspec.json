@@ -1,0 +1,134 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceNunit\\InsuranceNunit.csproj": {}
+  },
+  "projects": {
+    "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj",
+        "projectName": "DAL",
+        "projectPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceNunit\\InsuranceNunit.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceNunit\\InsuranceNunit.csproj",
+        "projectName": "InsuranceNunit",
+        "projectPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceNunit\\InsuranceNunit.csproj",
+        "packagesPath": "C:\\Users\\Nirmal Raj\\.nuget\\packages\\",
+        "outputPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceNunit\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Nirmal Raj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj"
+              },
+              "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\UI\\UI.csproj": {
+                "projectPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\UI\\UI.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.5.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\UI\\UI.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\UI\\UI.csproj",
+        "projectName": "UI",
+        "projectPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\UI\\UI.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Mphasis\\RLL 5\\InsuranceManagementSystem\\InsuranceManagementSystem\\InsuranceManagementSystem\\DAL\\DAL.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    }
+  }
+}

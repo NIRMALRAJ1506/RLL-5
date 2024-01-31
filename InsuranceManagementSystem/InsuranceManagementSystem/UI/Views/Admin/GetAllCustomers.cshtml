@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "GetAllCustomers";
+}
+
+﻿@model List<DAL.Customer>
+
+<style>
+    body{
+        background-color:lightgray;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: white;
+    }
+    td {
+        background-color: #8faebd;
+    }
+</style>
+
+<h2>All Customers</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+
+    </tr>
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>@customer.Id</td>
+            <td>@customer.FirstName</td>
+            <td>@customer.LastName</td>
+
+        </tr>
+    }
+</table>

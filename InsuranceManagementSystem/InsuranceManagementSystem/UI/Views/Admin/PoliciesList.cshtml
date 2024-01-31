@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "PoliciesList";
+}
+
+<style>
+    body{
+        background-color:lightgray;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: white;
+    }
+    td {
+        background-color: #8faebd;
+    }
+</style>
+
+<h2>Policies List</h2>
+
+<table>
+    <tr>
+        <th>Policy Id</th>
+        <th>Policy Number</th>
+        <th>Applied Date</th>
+        <th>Category</th>
+        <th>Policy Type</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var policy in Model)
+    {
+        <tr>
+            <td>@policy.PolicyId</td>
+            <td>@policy.PolicyNumber</td>
+            <td>@policy.AppliedDate.ToShortDateString()</td>
+            <td>@policy.Category</td>
+            <td>@policy.PolicyType</td>
+            <td>@policy.Price</td>
+        </tr>
+    }
+</table>
+

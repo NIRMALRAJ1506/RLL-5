@@ -1,0 +1,40 @@
+﻿
+
+﻿@model List<DAL.Questions>
+
+
+
+@{
+    ViewBag.Title = "Questions for Customer ID: " + ViewBag.CustomerId;
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<h2>Questions for Customer ID: @ViewBag.CustomerId</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question ID</th>
+            <th>Question</th>
+            <th>Date</th>
+            <th>Answer</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in Model)
+        {
+            <tr>
+                <td>@question.QuestionId</td>
+                <td>@question.Question</td>
+                <td>@question.Date.ToString("yyyy-MM-dd")</td>
+                <td>@question.Answer</td>
+             
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+
+}

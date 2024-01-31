@@ -1,0 +1,32 @@
+﻿@model UI.Models.PolicyViewModel
+
+@{
+    ViewBag.Title = "Delete Policy";
+}
+
+<h2>Delete Policy</h2>
+
+<p>Are you sure you want to delete the following policy?</p>
+
+<div>
+    <strong>Policy Number:</strong> @Model.PolicyNumber
+</div>
+
+<div>
+    <strong>Applied Date:</strong> @Model.AppliedDate.ToString("yyyy-MM-dd")
+</div>
+
+<div>
+    <strong>Category:</strong> @Model.Category
+</div>
+
+@using (Html.BeginForm("ConfirmDeletePolicy", "Policy", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.PolicyNumber)
+
+    <p>
+        <input type="submit" value="Confirm Delete" />
+        @Html.ActionLink("Cancel", "ShowAllPolicies", "Policy")
+    </p>
+}

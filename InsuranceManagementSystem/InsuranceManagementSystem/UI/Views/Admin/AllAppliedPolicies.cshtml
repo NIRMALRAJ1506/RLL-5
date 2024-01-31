@@ -1,0 +1,113 @@
+﻿@using DAL
+@model List<DAL.AppliedPolicy>
+
+<style>
+    body{
+        background-color:lightgray;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: white;
+    }
+    td {
+        background-color: #8faebd;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Policy Id</th>
+            <th>Policy Number</th>
+            <th>Applied Date</th>
+            <th>Category</th>
+            <th>Policy Type</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var policy in Model)
+            {
+                <tr>
+                    <td>@policy.AppliedPolicyId</td>
+                    <td>@policy.PolicyNumber</td>
+                    <td>@policy.AppliedDate.ToShortDateString()</td>
+                    <td>@policy.Category</td>
+                    <td>@policy.PolicyType</td>
+                    <td>@policy.Price</td>
+                    <td>
+                        @switch (policy.StatusCode)
+                        {
+                            case PolicyStatus.Pending:<span>Pending</span>
+                                break;
+
+                            case PolicyStatus.Approved: <span>Approved</span>
+                                break;
+
+                            case PolicyStatus.Disapproved: <span>Disapproved</span>
+                                break;
+
+                            default: <span>Unknown</span>
+                                break;
+                        }
+
+                    </td>
+
+                    <td>
+                        @if (policy.StatusCode == PolicyStatus.Pending)
+                        {
+                            using (Html.BeginForm("ApprovePolicy", "Admin", FormMethod.Post))
+                            {
+                                @Html.Hidden("policyId", policy.AppliedPolicyId)
+                                <button type="submit" class="btn btn-outline-success">Approve</button>
+                            }
+
+                            using (Html.BeginForm("DisapprovePolicy", "Admin", FormMethod.Post))
+                            {
+                                @Html.Hidden("policyId", policy.AppliedPolicyId)
+                                <button type="submit" class="btn btn-outline-danger">Disapprove</button>
+                            }
+                        }
+                        else
+                        {
+                            <span class="badge badge-secondary">
+                                @if (policy.StatusCode == PolicyStatus.Approved)
+                                {
+                                    <text>Approved</text>
+                                }
+                                else
+                                {
+                                    <text>Disapproved</text>
+                                }
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<script>
+    function approvePolicy(policyId) {
+        //implement the logic to handle approval, eg: make an AJAX request
+        console.log("Disapproving policy with ID:" + policyId);
+    }
+</script>
+
+
+

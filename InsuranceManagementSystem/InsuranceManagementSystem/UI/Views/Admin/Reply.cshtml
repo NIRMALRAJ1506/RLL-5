@@ -1,0 +1,19 @@
+﻿@model UI.Models.QuestionView
+@{
+    ViewBag.Title = "Reply";
+}
+
+<h2>Reply</h2>
+<p>Question: @Model.Question</p>
+<p>Date: @Model.Date.ToString("yyyy-MM-dd")</p>
+
+<form asp-action="Reply" method="post">
+    <input type="hidden" asp-for="QuestionId" />
+
+    <div class="form-group">
+        <label asp-for="Answer">Answer:</label>
+        <textarea asp-for="Answer" class="form-control"></textarea>
+        <span asp-validation-for="Answer" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Reply</button>
+</form>

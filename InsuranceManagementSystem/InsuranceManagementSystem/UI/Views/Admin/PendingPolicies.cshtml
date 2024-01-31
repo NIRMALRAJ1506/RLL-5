@@ -1,0 +1,77 @@
+﻿@model List<DAL.AppliedPolicy>
+@{
+    ViewBag.Title = "PendingPolicies";
+}
+<style>
+    body{
+        background-color:lightgray;
+    }
+    h2 {
+        color: black;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        color: #333
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    tbody tr:hover {
+        background-color: lightblue;
+    }
+
+    .status-pending {
+        background-color: #ffc107;
+        color: black;
+        padding: 10px 11px;
+        border-radius: 5px;
+    }
+    td {
+        background-color: #8faebd;
+    }
+</style>
+<h2>Pending Policies</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Policy Id</th>
+            <th>Policy Number</th>
+            <th>Applied Date</th>
+            <th>Category</th>
+            <th>Policy Type</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var policy in Model)
+        {
+            <tr>
+                <td>@policy.AppliedPolicyId</td>
+                <td>@policy.PolicyNumber</td>
+                <td>@policy.AppliedDate.ToShortDateString()</td>
+                <td>@policy.Category</td>
+                <td>@policy.PolicyType</td>
+                <td>@policy.Price</td>
+                <td>
+                    <span class="status-pending">Pending</span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

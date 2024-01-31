@@ -1,0 +1,76 @@
+﻿@model List<UI.Models.PolicyViewModel>
+
+@{
+    ViewBag.Title = "All Policies";
+}
+
+<style>
+    body{
+        background-color:lightgray
+    }
+    h2{
+        color:black;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: #fff; 
+    }
+
+    td {
+        background-color: #8faebd;
+    }
+
+    .delete-link {
+        color: #e74c3c; /* Red color for delete link */
+        text-decoration: none;
+        font-weight: bold;
+        background-color: #fff; /* White background for button */
+        border: 1px solid #e74c3c; /* Red border for button */
+        padding: 6px 12px;
+        border-radius: 4px;
+    }
+
+        .delete-link:hover {
+            color: #c0392b; /* Darker red color on hover */
+            background-color: #f2dede; /* Light red background on hover */
+        }
+</style>
+
+<h2>All Policies</h2>
+
+<table class="table">
+    <tr class="heading-row">
+        <th style="background-color: #343a40;">Policy Number</th>
+        <th style="background-color: #343a40;">Applied Date</th>
+        <th style="background-color: #343a40;">Category</th>
+        <th style="background-color: #343a40;">Policy Type</th>
+        <th style="background-color: #343a40;">Price</th>
+        <th style="background-color: #343a40;">Action</th>
+    </tr>
+
+    @foreach (var policy in Model)
+    {
+        <tr>
+            <td style="background-color: #8faebd;">@policy.PolicyNumber</td>
+            <td style="background-color: #8faebd;">@policy.AppliedDate.ToString("yyyy-MM-dd")</td>
+            <td style="background-color: #8faebd;">@policy.Category</td>
+            <td style="background-color: #8faebd;">@policy.PolicyType </td>
+            <td style="background-color: #8faebd;">@policy.Price</td>
+            <td style="background-color: #8faebd;">
+                @Html.ActionLink("Delete", "DeletePolicy", "Policy", new { policyNumber = policy.PolicyNumber }, new { @class = "delete-link" })
+            </td>
+        </tr>
+    }
+</table>

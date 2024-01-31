@@ -1,0 +1,150 @@
+﻿@model List<DAL.Questions>
+@{
+    ViewBag.Title = "Question";
+}
+
+<style>
+    body{
+        background-color:lightgray;
+    }
+    .replied {
+        color: green;
+    }
+
+    h2 {
+        color: black;
+    }
+
+    thead th {
+        background-color: #343a40;
+        color: #000;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: 'Times New Roman';
+        color: black;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .btn-link {
+        color: #007bff;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .reply-container {
+        margin-top: 10px;
+        display: none;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 12px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: lightblue;
+        }
+    td {
+        background-color: #8faebd;
+    }
+</style>
+
+<h2>Questions</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="background-color: #343a40;">Question</th>
+            <th style="background-color: #343a40;">Date</th>
+            <th style="background-color: #343a40;">Customer ID</th>
+            <th style="background-color: #343a40;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in Model)
+        {
+            <tr>
+                <td style="background-color: #8faebd;">@question.Question</td>
+                <td style="background-color: #8faebd;">@question.Date.ToString("yyyy-MM-dd")</td>
+                <td style="background-color: #8faebd;">@question.CustomerId</td>
+                <td style="background-color: #8faebd;">
+                    @if (!string.IsNullOrEmpty(question.Answer))
+                    {
+                        <span class="replied">Replied</span>
+                        <br />
+                        <span>@question.Answer</span>
+                    }
+                    else
+                    {
+                        <button class="btn btn-link reply-btn" data-question-id="@question.QuestionId">Reply</button>
+                        <div class="reply-container" data-question-id="@question.QuestionId">
+                            <textarea class="form-control reply-textarea" placeholder="Enter Your Answer"></textarea>
+                            <button class="btn btn-primary submit-reply-btn">Submit Reply</button>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".reply-btn").click(function () {
+                var questionid = $(this).data("question-id");
+                $(".reply-container[data-question-id='" + questionid + "']").toggle();
+            });
+            $(".submit-reply-btn").click(function () {
+                var questionid = $(this).closest(".reply-container").data("question-id");
+                var answer = $(this).siblings(".reply-textarea").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/SaveAnswer",
+                    data: { questionid: questionid, answer: answer },
+                    success: function () {
+                        alert("Answer submitted successfully!!!");
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("An error Occurred While Submitting the Answer....");
+                    }
+                });
+            });
+        });
+    </script>
+}
+

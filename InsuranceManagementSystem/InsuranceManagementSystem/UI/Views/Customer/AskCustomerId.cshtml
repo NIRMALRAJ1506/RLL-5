@@ -1,0 +1,24 @@
+﻿﻿@{
+    ViewBag.Title = "Ask Customer ID";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Enter Customer ID</h2>
+
+            @using (Html.BeginForm("DisplayQuestionsByCustomerId", "Customer", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="customerId">Customer ID:</label>
+                    <input type="number" name="customerId" class="form-control" required />
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

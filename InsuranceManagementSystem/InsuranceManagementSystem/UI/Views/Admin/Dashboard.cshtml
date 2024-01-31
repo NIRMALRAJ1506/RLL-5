@@ -1,0 +1,142 @@
+﻿@{ 
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    .content {
+        margin-left: 270px;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom:20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 1px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+    }
+
+    .card {
+        width: 450px;
+        background-color: lightgray;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+        margin-bottom: 20px;
+    }
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-title{
+        color:black;
+    }
+
+    </style>
+    
+
+   <div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("GetAllCustomers", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total registered User </h5>
+                        <br/> <br/>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("PoliciesList", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Listed Policies</h5>
+                        <br /> <br />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <br /> <br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("Categories", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Listed Categories</h5>
+                        <br /> <br />
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("Question", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Questions</h5>
+                        <br /> <br />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("AllAppliedPolicies", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Applied Policy Holder</h5>
+                        <br /> <br />
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("ApprovedPolicies", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Approved Policy Holder</h5>
+                        <br /> <br />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <br /> <br />
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("DisapprovedPolicies", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Disapproved Policy Holder</h5>
+                        <br /> <br />
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("PendingPolicies", "Admin")">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Policy Holder Waiting For Approval</h5>
+                        <br/> <br/>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

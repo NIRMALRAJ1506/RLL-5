@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "AppliedPolicies";
+}
+
+﻿@model List<DAL.AppliedPolicy>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightgray; 
+            color: #333; 
+            margin: 20px;
+        }
+
+        h2 {
+            color: black; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        tbody tr:hover {
+            background-color: #f5f5f5; 
+        }
+        td {
+            background-color: #8faebd;
+        }
+    </style>
+</head>
+<body>
+    <h2>List of Applied Policies</h2>
+
+    <table>
+        <tr>
+            <th>Applied Policy ID</th>
+            <th>Policy Number</th>
+            <th>Applied Date</th>
+            <th>Category</th>
+            <th>Policy Type</th>
+            <th>Price</th>
+            <th>Customer ID</th>
+            <th>Status</th>
+        </tr>
+        @foreach (var appliedPolicy in Model)
+        {
+            <tr>
+                <td>@appliedPolicy.AppliedPolicyId</td>
+                <td>@appliedPolicy.PolicyNumber</td>
+                <td>@appliedPolicy.AppliedDate.ToShortDateString()</td>
+                <td>@appliedPolicy.Category</td>
+                <td>@appliedPolicy.PolicyType</td>
+                <td>@appliedPolicy.Price</td>
+                <td>@appliedPolicy.CustomerId</td>
+                <td>@appliedPolicy.StatusCode</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
+

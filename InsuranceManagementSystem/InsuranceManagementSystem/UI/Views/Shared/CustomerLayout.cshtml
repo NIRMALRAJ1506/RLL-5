@@ -1,0 +1,90 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the sidebar and web form */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            color: #fff;
+        }
+
+            .sidebar .profile-picture {
+                background-color: aliceblue;
+                width: 100px; /* Adjust the size of your profile picture */
+                height: 100px; /* Ensure it's a square */
+                border-radius: 50%; /* Make it round */
+                display: block;
+                margin: 0 auto;
+                overflow: hidden; /* Hide overflow outside the circle */
+            }
+
+            .sidebar a {
+                padding: 10px 25px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #fff;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background-color: #555;
+                    transform: scale(1.05);
+                }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Logout", "Validation")">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <div class="profile-picture">
+            <img src="~/Content/Customer.jpeg" alt="Profile Picture">
+        </div>
+        <h3 style="margin-left: 88px;">Customer</h3>
+        <a href="@Url.Action("Dashboard", "Customer")" ">Dashboard</a>
+        
+        <a href="@Url.Action("ViewPoliciesToApply", "Customer")">Policy</a>
+
+
+        <a href="@Url.Action("AskQuestion", "Customer")">Question</a>
+    </div>
+
+    <div id="ContentPlaceHolder2">
+        @RenderBody() <!-- Render the content of the view here -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

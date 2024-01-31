@@ -1,0 +1,148 @@
+﻿﻿@model UI.Models.UserView
+
+@{
+    ViewBag.Title = "CustomerReg";
+}
+<style>
+    body {
+        background-color: lightgrey;
+        font-weight: bold;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<div class="container-fluid">
+    <h2>New Registration</h2>
+
+</div>
+@using (Html.BeginForm("CustomerReg", "Validation", FormMethod.Post, new { id = "custRegForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, "Enter First Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, "Enter Last Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, "Enter Email :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, "Enter Username:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, "Enter Phone Number:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, "Enter Password :", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, "Enter to Confirm Password : ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Captcha:</label>
+            <div class="col-md-8">
+                <img id="captchaImage" src="@Url.Action("GenerateCaptchaImage", "Validation")" alt="Captcha Image" />
+                <img id="refreshCaptchaButton" src="~/Content/Refresh.jpg" alt="Refresh Captcha" onclick="refreshCaptcha()" style="cursor: pointer; width: 20px; height: 20px;" />
+                @Html.TextBox("captchaInput", null, new { @class = "form-control" })
+                @Html.ValidationMessage("captchaInput")
+            </div>
+        </div>
+        @*<div class="form-group">
+            @Html.Label("User Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <label class="radio-inline">
+                            @Html.RadioButtonFor(model => model.UserType, 2) Customer
+                        </label>
+                        <label class="radio-inline">
+                            @Html.RadioButtonFor(model => model.UserType, 1) Admin
+                        </label>
+                        @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                    }
+                }
+                else
+                {
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model => model.UserType, 2, new { @checked = true }) Customer
+                    </label>
+                    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="button" value="Reset" class="ms-2 btn btn-warning" onclick="resetForm('custRegForm')" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function resetForm(formId) {
+            var form = document.getElementById(formId);
+
+            // Reset the form fields
+            form.reset();
+
+            // Clear validation messages
+            var validationMessages = form.querySelectorAll('[data-valmsg-for]');
+            for (var i = 0; i < validationMessages.length; i++) {
+                validationMessages[i].innerHTML = ''; // Clear validation messages
+                validationMessages[i].style.display = 'none'; // Hide the error message container
+            }
+    }
+    function refreshCaptcha() {
+            // Get the captcha image element
+            var captchaImage = document.getElementById('captchaImage');
+
+            // Update the captcha image source to get a new captcha
+            captchaImage.src = '@Url.Action("GenerateCaptchaImage", "Validation")?' + new Date().getTime();
+
+            // Clear the previous captcha input value
+            document.getElementById('captchaInput').value = '';
+        }
+    </script>
+}

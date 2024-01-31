@@ -1,0 +1,48 @@
+﻿@model UI.Models.PolicyViewModel
+
+@{
+    ViewBag.Title = "Edit Policy";
+}
+
+<h2>Edit Policy</h2>
+
+@using (Html.BeginForm("EditPolicy", "Policy", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PolicyNumber)
+        @Html.EditorFor(model => model.PolicyNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.PolicyNumber, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AppliedDate)
+        @Html.EditorFor(model => model.AppliedDate, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AppliedDate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Category)
+        @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PolicyType)
+        @Html.EditorFor(model => model.PolicyType, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.PolicyType, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price)
+        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "ShowAllPolicies", "Policy", new { @class = "btn btn-default" })
+    </div>
+}
+

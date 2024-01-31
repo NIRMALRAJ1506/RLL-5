@@ -1,0 +1,20 @@
+﻿﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // Redirect to home page
+        function redirectToHomePage() {
+            window.location.href = "@Url.Action("Index", "Home")"; // Replace with your actual home page URL
+        }
+
+        // Disable back button and redirect to home page
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+            redirectToHomePage();
+        };
+    </script>
+</head>
+<!-- Rest of the HTML -->
+</html>
