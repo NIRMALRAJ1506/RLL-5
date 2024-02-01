@@ -1,14 +1,14 @@
-﻿
+﻿@model List<DAL.Customer>
+
 @{
     ViewBag.Title = "GetAllCustomers";
 }
 
-﻿@model List<DAL.Customer>
-
 <style>
-    body{
-        background-color:lightgray;
+    body {
+        background-color: lightgray;
     }
+
     table {
         width: 100%;
         border-collapse: collapse;
@@ -25,8 +25,26 @@
         background-color: #343a40;
         color: white;
     }
+
     td {
         background-color: #8faebd;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .edit-button, .delete-button {
+        background-color: #28a745;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .delete-button {
+        background-color: #dc3545;
     }
 </style>
 
@@ -37,7 +55,7 @@
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
-
+        <th>Actions</th>
     </tr>
     @foreach (var customer in Model)
     {
@@ -45,7 +63,18 @@
             <td>@customer.Id</td>
             <td>@customer.FirstName</td>
             <td>@customer.LastName</td>
-
+            <td class="action-buttons">
+                @*<a href="@Url.Action("EditCustomer", "Admin", new { customerId = customer.Id })" class="edit-button">Edit</a>*@
+                <button class="delete-button" onclick="confirmDelete(@customer.Id)">Delete</button>
+            </td>
         </tr>
     }
 </table>
+
+<script>
+    function confirmDelete(customerId) {
+        if (confirm('Are you sure you want to delete this customer?')) {
+            window.location.href = '@Url.Action("DeleteCustomer", "Admin")' + '?customerId=' + customerId;
+        }
+    }
+</script>

@@ -1,6 +1,8 @@
 ﻿using DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,6 +47,99 @@ namespace UI.Controllers
                 return RedirectToAction("AdminLogin", "Validation");
             }
         }
+
+        //public ActionResult EditCustomer(int customerId)
+        //{
+        //    if (Session["AdminUserId"] != null)
+        //    {
+        //        var customer = dbContext.Customers.Find(customerId);
+        //        if (customer == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
+
+        //        return View(customer);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("AdminLogin", "Validation");
+        //    }
+        //}
+
+        //[HttpPost]
+        //public ActionResult EditCustomer(Customer customer)
+        //{
+        //    if (Session["AdminUserId"] != null)
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            try
+        //            {
+        //                // Attach the entity to the context and mark specific properties as modified
+        //                dbContext.Entry(customer).Property(c => c.FirstName).IsModified = true;
+        //                dbContext.Entry(customer).Property(c => c.LastName).IsModified = true;
+
+        //                dbContext.SaveChanges();
+
+        //                return RedirectToAction("GetAllCustomers");
+        //            }
+        //            catch (DbUpdateException ex)
+        //            {
+        //                // Log the exception or handle it appropriately
+        //                ModelState.AddModelError("", "An error occurred while saving changes.");
+        //            }
+                
+        //    }
+
+
+        //        return View(customer);
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("AdminLogin", "Validation");
+        //    }
+        //}
+
+        public ActionResult DeleteCustomer(int customerId)
+        {
+            if (Session["AdminUserId"] != null)
+            {
+                var customer = dbContext.Customers.Find(customerId);
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(customer);
+            }
+            else
+            {
+                return RedirectToAction("AdminLogin", "Validation");
+            }
+        }
+
+        [HttpPost, ActionName("DeleteCustomer")]
+        public ActionResult ConfirmDeleteCustomer(int id)
+        {
+            if (Session["AdminUserId"] != null)
+            {
+                var customer = dbContext.Customers.Find(id);
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+
+                dbContext.Customers.Remove(customer);
+                dbContext.SaveChanges();
+
+                return RedirectToAction("GetAllCustomers");
+            }
+            else
+            {
+                return RedirectToAction("AdminLogin", "Validation");
+            }
+        }
+
 
         //Action method to get all users
         public ActionResult GetAllUsers()
