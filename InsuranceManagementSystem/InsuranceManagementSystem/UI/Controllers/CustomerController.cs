@@ -47,52 +47,99 @@ namespace UI.Controllers
             List<Policy> policies = dbContext.Policies.ToList();  
             return View(policies);
         }
-        public ActionResult Apply(int policyId)  
+        public ActionResult Apply(int policyId)
         {
-            int customerId = 1;
-           
-            bool AppliedAlready = dbContext.AppliedPolicies
-            .Any(ap => ap.CustomerId == customerId && ap.AppliedPolicyId == policyId);
-            if (!AppliedAlready)
-            {
-              
-                Policy policy = dbContext.Policies.FirstOrDefault(p => p.PolicyId == policyId);
+            // Retrieve CustomerUserName from session
+            string customerUserName = Session["CustomerUserName"] as string;
 
-                if (policy != null)
+            if (!string.IsNullOrEmpty(customerUserName))
+            {
+                // Retrieve the customer from the database based on CustomerUserName
+                Customer customer = dbContext.Customers.FirstOrDefault(c => c.UserName == customerUserName);
+
+                if (customer != null)
                 {
-                   
-                    AppliedPolicy appliedPolicy = new AppliedPolicy
+                    int customerId = customer.Id;
+
+                    bool AppliedAlready = dbContext.AppliedPolicies
+                        .Any(ap => ap.CustomerId == customerId && ap.AppliedPolicyId == policyId);
+
+                    if (!AppliedAlready)
                     {
-                        PolicyNumber = policy.PolicyNumber,
-                        AppliedDate = DateTime.Now,
-                        Category = policy.Category,
-                        CustomerId = customerId,
-                        PolicyType = policy.PolicyType, // Set the PolicyType from the original policy
-                        Price = policy.Price // Set the Price from the original policy
-                    };
-              
-                    dbContext.AppliedPolicies.Add(appliedPolicy);
-                    dbContext.SaveChanges();
+                        Policy policy = dbContext.Policies.FirstOrDefault(p => p.PolicyId == policyId);
+
+                        if (policy != null)
+                        {
+                            AppliedPolicy appliedPolicy = new AppliedPolicy
+                            {
+                                PolicyNumber = policy.PolicyNumber,
+                                AppliedDate = DateTime.Now,
+                                Category = policy.Category,
+                                CustomerId = customerId,
+                                PolicyType = policy.PolicyType,
+                                Price = policy.Price
+                            };
+
+                            dbContext.AppliedPolicies.Add(appliedPolicy);
+                            dbContext.SaveChanges();
+                        }
+                        else
+                        {
+                            // Handle the case where the policy with the specified policyId is not found
+                        }
+                    }
+                    else
+                    {
+                        // Handle the case where the policy has already been applied by the customer
+                    }
                 }
                 else
                 {
-               
+                    // Handle the case where the customer with the specified CustomerUserName is not found
                 }
             }
-         
+            else
+            {
+                // Handle the case where CustomerUserName is not found in session
+            }
+
             return RedirectToAction("AppliedPolicies");
         }
-        public ActionResult AppliedPolicies()   
-        {
-            List<AppliedPolicy> appliedPolicies;   
 
-            using (var dbContext = new InsuranceDbContext())
+        public ActionResult AppliedPolicies()
+        {
+            // Retrieve CustomerUserName from session
+            string customerUserName = Session["CustomerUserName"] as string;
+
+            if (!string.IsNullOrEmpty(customerUserName))
             {
-                
-                appliedPolicies = dbContext.AppliedPolicies.ToList();
+                using (var dbContext = new InsuranceDbContext())
+                {
+                    // Retrieve the customer from the database based on CustomerUserName
+                    Customer customer = dbContext.Customers.FirstOrDefault(c => c.UserName == customerUserName);
+
+                    if (customer != null)
+                    {
+                        int customerId = customer.Id;
+
+                        // Filter applied policies for the logged-in customer
+                        List<AppliedPolicy> appliedPolicies = dbContext.AppliedPolicies
+                            .Where(ap => ap.CustomerId == customerId)
+                            .ToList();
+
+                        return View(appliedPolicies);
+                    }
+                    else
+                    {
+                        // Handle the case where the customer with the specified CustomerUserName is not found
+                    }
+                }
             }
-            return View(appliedPolicies);
+
+            // Handle the case where CustomerUserName is not found in session
+            return RedirectToAction("CustomerLogin", "Validation"); // Redirect to login page or handle as appropriate
         }
+
         public ActionResult Categories()  
         {
             var categories = dbContext.Categories.ToList();
